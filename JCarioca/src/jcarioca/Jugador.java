@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jcarioca;
 
 import barajas.Carta;
@@ -31,8 +26,8 @@ public class Jugador {
     public LinkedList<Carta> getCartas() {
         return cartas;
     }
-    
-    public void addCarta(Carta carta){
+
+    public void addCarta(Carta carta) {
         cartas.add(carta);
     }
 
@@ -59,9 +54,16 @@ public class Jugador {
         System.out.println("===================================");
 //        int i = 0;
         for (Carta c : cartas) {
-            System.out.println(/*"[" + (i++) + "] " +*/ c);
+            System.out.println(/*"[" + (i++) + "] " +*/c);
         }
         System.out.println("===================================");
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Jugador{" + "nombre=" + nombre + '}';
+    }
+    
+    
 }
