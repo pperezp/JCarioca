@@ -39,9 +39,9 @@ public class JCarioca {
         return jugadores.get(indiceJugador).getCartas();
     }
 
-    public void jugar(int indiceJugador, int indiceCarta) {
+    public void jugar(int indiceJugador, int idCarta) {
         Jugador jugador = jugadores.get(indiceJugador);
-        Carta carta = jugador.getCarta(indiceCarta);
+        Carta carta = jugador.getCarta(idCarta);
         jugador.remover(carta);
         montoncito.add(carta);
 
@@ -69,7 +69,7 @@ public class JCarioca {
         int indice;
         while (true) {
             carioca.getJugador(0).imprimirCartas();
-            System.out.print("INDICE: ");
+            System.out.print("ID CARTA: ");
             indice = scan.nextInt();
 
             carioca.jugar(0, indice);

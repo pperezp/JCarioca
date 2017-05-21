@@ -7,12 +7,14 @@ package jcarioca;
 
 import barajas.Carta;
 import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 /**
  *
  * @author prez
  */
 public class Jugador {
+
     private String nombre;
     private LinkedList<Carta> cartas;
 
@@ -29,22 +31,31 @@ public class Jugador {
     public LinkedList<Carta> getCartas() {
         return cartas;
     }
-    
-    public Carta getCarta(int indice){
-        return cartas.get(indice);
+
+    public Carta getCarta(int idCarta) {
+//        for(Carta c : cartas){
+//            if(c.getId() == idCarta){
+//                return c;
+//            }
+//        }
+//        
+//        return null;
+        return cartas.stream()
+                .filter(item -> item.getId() == idCarta)
+                .collect(Collectors.toList()).get(0);
     }
-    
-    public void remover(Carta carta){
+
+    public void remover(Carta carta) {
         cartas.remove(carta);
     }
-    
-    public Jugador imprimirCartas(){
+
+    public Jugador imprimirCartas() {
         System.out.println("===================================");
-        System.out.println("Cartas de ["+nombre+"]");
+        System.out.println("Cartas de [" + nombre + "]");
         System.out.println("===================================");
-        int i = 0;
-        for(Carta c : cartas){
-            System.out.println("["+(i++)+"] "+c);
+//        int i = 0;
+        for (Carta c : cartas) {
+            System.out.println(/*"[" + (i++) + "] " +*/ c);
         }
         System.out.println("===================================");
         return this;
