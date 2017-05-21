@@ -3,9 +3,11 @@ package barajas;
 import util.Mezclador;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class Baraja {
     private LinkedList<Carta> cartas;
+    private Random random;
     
     /*Info inportante para construir una baraja*/
 //    public static final byte CARTAS = 52;
@@ -44,12 +46,24 @@ public class Baraja {
         if(!ordenada){
             Mezclador.mezclar(cartas);
         }
-
-        imprimirBaraja();
     }
 
     public LinkedList<Carta> getCartas() {
         return cartas;
+    }
+    
+    public Carta getCartaRandom(){
+        random = new Random();
+        
+        // genero un indice random y rescato la carta
+        int indice = random.nextInt(cartas.size());
+        Carta carta = cartas.get(indice);
+        
+        // saco la carta de la baraja
+        cartas.remove(carta);
+        
+        // retorno la carta
+        return carta;
     }
     
     @Override
@@ -57,7 +71,7 @@ public class Baraja {
         return "Baraja{" + "cartas=" + cartas + '}';
     }
 
-    private void imprimirBaraja() {
+    public void imprimir() {
         System.out.println("========================================");
         System.out.println("Cantidad de cartas: "+cartas.size());
         System.out.println("========================================");
