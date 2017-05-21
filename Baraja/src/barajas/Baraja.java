@@ -1,5 +1,6 @@
 package barajas;
 
+import util.Mezclador;
 import java.util.Collections;
 import java.util.LinkedList;
 
@@ -41,12 +42,16 @@ public class Baraja {
         }
         
         if(!ordenada){
-            Collections.shuffle(cartas);
+            Mezclador.mezclar(cartas);
         }
 
         imprimirBaraja();
     }
 
+    public LinkedList<Carta> getCartas() {
+        return cartas;
+    }
+    
     @Override
     public String toString() {
         return "Baraja{" + "cartas=" + cartas + '}';
