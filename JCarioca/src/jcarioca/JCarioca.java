@@ -23,12 +23,16 @@ public class JCarioca {
         for (int i = 0; i < cantJugadores; i++) {
             jugadores.add(
                     new Jugador("j" + i)
-                            .setCartas(mazo.getCartas(12))
+                    .setCartas(mazo.getCartas(12))
             //                    .imprimirCartas()
             );
         }
 
 //        mazo.imprimir();
+    }
+    
+    public Carta sacarCartaDelMazo(){
+        return mazo.sacarCarta();
     }
 
     public Jugador getJugador(int indice) {
@@ -52,7 +56,13 @@ public class JCarioca {
         return montoncito;
     }
 
-    private void imprimirMontoncito() {
+    public Carta sacarCartaDeMontoncito() {
+        Carta ultima = montoncito.peekLast();
+        montoncito.remove(ultima);
+        return ultima;
+    }
+
+    public void imprimirMontoncito() {
         System.out.println("=======================");
         System.out.println("Montoncito:");
         System.out.println("=======================");
@@ -66,13 +76,47 @@ public class JCarioca {
         Scanner scan = new Scanner(System.in);
         JCarioca carioca = new JCarioca(Mazo.DESORDENADO, 1);
 
-        int indice;
+        int opcion;
         while (true) {
-            carioca.getJugador(0).imprimirCartas();
-            System.out.print("ID CARTA: ");
-            indice = scan.nextInt();
+            System.out.println("=====================");
+            System.out.println("MENÚ");
+            System.out.println("=====================");
+            System.out.println("1.- Ver montoncito");
+            System.out.println("2.- Sacar carta de montoncito");
+            System.out.println("3.- Sacar carta del mazo");
+            System.out.println("4.- Botar carta");
+            System.out.println("5.- Ver mis cartas");
+            System.out.println("OP: ");
+            opcion = scan.nextInt();
+            
+            switch (opcion) {
+                case 1:
+                    carioca.imprimirMontoncito();
+                    break;
+                    
+                case 2:
+                    Carta carta = carioca.sacarCartaDeMontoncito();
+                    carioca.getJugador(0).addCarta(carta);
+                    break;
+                    
+                case 3:
+                    carta = carioca.sacarCartaDelMazo();
+                    carioca.getJugador(0).addCarta(carta);
+                    break;
+                    
+                case 4:
+                    carioca.getJugador(0).imprimirCartas();
+                    System.out.print("ID CARTA: ");
+                    int idCarta = scan.nextInt();
+                    carioca.jugar(0, idCarta);
+                    break;
+                    
+                case 5:
+                    carioca.getJugador(0).imprimirCartas();
+                    break;
+            }
 
-            carioca.jugar(0, indice);
+            
         }
 //        carioca.getJugador(0).imprimirCartas();
 //        carioca.getJugador(1).imprimirCartas();

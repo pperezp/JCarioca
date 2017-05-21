@@ -31,6 +31,10 @@ public class Jugador {
     public LinkedList<Carta> getCartas() {
         return cartas;
     }
+    
+    public void addCarta(Carta carta){
+        cartas.add(carta);
+    }
 
     public Carta getCarta(int idCarta) {
 //        for(Carta c : cartas){
