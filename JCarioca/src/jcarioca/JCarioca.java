@@ -1,33 +1,82 @@
 package jcarioca;
 
+import barajas.Carta;
 import barajas.Mazo;
+import java.util.LinkedList;
+import java.util.Scanner;
 
 /**
  *
  * @author prez
  */
 public class JCarioca {
-    private Mazo m;
-    private Jugador j1;
-    private Jugador j2;
-    
-    public JCarioca(boolean orden){
-        m = new Mazo(orden);
-        
-        j1 = new Jugador("j1");
-        j2 = new Jugador("j2");
-        
-        j1.setCartas(m.getCartas(12));
-        j2.setCartas(m.getCartas(12));
-        
-        j1.imprimirCartas();
-        j2.imprimirCartas();
-        
-        m.imprimir();
+
+    private Mazo mazo;
+    private LinkedList<Jugador> jugadores;
+    private LinkedList<Carta> montoncito; // son las cartas que se dejan cuando un jugador juega
+
+    public JCarioca(boolean orden, int cantJugadores) {
+        mazo = new Mazo(orden);
+        jugadores = new LinkedList<>();
+        montoncito = new LinkedList<>();
+
+        for (int i = 0; i < cantJugadores; i++) {
+            jugadores.add(
+                    new Jugador("j" + i)
+                            .setCartas(mazo.getCartas(12))
+            //                    .imprimirCartas()
+            );
+        }
+
+//        mazo.imprimir();
     }
-    
+
+    public Jugador getJugador(int indice) {
+        return jugadores.get(indice);
+    }
+
+    public LinkedList<Carta> getCartas(int indiceJugador) {
+        return jugadores.get(indiceJugador).getCartas();
+    }
+
+    public void jugar(int indiceJugador, int indiceCarta) {
+        Jugador jugador = jugadores.get(indiceJugador);
+        Carta carta = jugador.getCarta(indiceCarta);
+        jugador.remover(carta);
+        montoncito.add(carta);
+
+        imprimirMontoncito();
+    }
+
+    public LinkedList<Carta> getMontoncito() {
+        return montoncito;
+    }
+
+    private void imprimirMontoncito() {
+        System.out.println("=======================");
+        System.out.println("Montoncito:");
+        System.out.println("=======================");
+        for (Carta c : montoncito) {
+            System.out.println(c);
+        }
+        System.out.println("=======================");
+    }
+
     public static void main(String[] args) {
-        JCarioca carioca = new JCarioca(Mazo.DESORDENADO);
+        Scanner scan = new Scanner(System.in);
+        JCarioca carioca = new JCarioca(Mazo.DESORDENADO, 1);
+
+        int indice;
+        while (true) {
+            carioca.getJugador(0).imprimirCartas();
+            System.out.print("INDICE: ");
+            indice = scan.nextInt();
+
+            carioca.jugar(0, indice);
+        }
+//        carioca.getJugador(0).imprimirCartas();
+//        carioca.getJugador(1).imprimirCartas();
+
     }
-    
+
 }

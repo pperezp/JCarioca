@@ -21,17 +21,32 @@ public class Jugador {
         this.cartas = new LinkedList<>();
     }
 
-    public void setCartas(LinkedList<Carta> cartas) {
+    public Jugador setCartas(LinkedList<Carta> cartas) {
         this.cartas = cartas;
+        return this;
+    }
+
+    public LinkedList<Carta> getCartas() {
+        return cartas;
     }
     
-    public void imprimirCartas(){
+    public Carta getCarta(int indice){
+        return cartas.get(indice);
+    }
+    
+    public void remover(Carta carta){
+        cartas.remove(carta);
+    }
+    
+    public Jugador imprimirCartas(){
         System.out.println("===================================");
         System.out.println("Cartas de ["+nombre+"]");
         System.out.println("===================================");
+        int i = 0;
         for(Carta c : cartas){
-            System.out.println(c);
+            System.out.println("["+(i++)+"] "+c);
         }
         System.out.println("===================================");
+        return this;
     }
 }
