@@ -35,7 +35,7 @@ public class Test {
                 case 2:
                     Carta carta = carioca.sacarCartaDeMontoncito();
                     if (carta != null) {
-                        System.out.println("Carta sacada del monton: " + carta);
+                        System.out.println("Carta sacada del montón: " + carta);
                         carioca.getJugadorActual().addCarta(carta);
                     }else{
                         System.out.println("No hay cartas en el montoncito");

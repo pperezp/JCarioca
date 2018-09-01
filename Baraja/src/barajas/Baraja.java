@@ -58,7 +58,7 @@ public class Baraja {
     public Carta getCartaRandom() {
         random = new Random();
 
-        // genero un indice random y rescato la carta
+        // genero un índice random y rescato la carta
         int indice = random.nextInt(cartas.size());
         Carta carta = cartas.get(indice);
 
